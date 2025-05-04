@@ -1,10 +1,13 @@
 package org.example.expense_tracker.service;
 
 import org.example.expense_tracker.dto.ExpenseDto;
+import org.example.expense_tracker.model.Category;
 import org.example.expense_tracker.model.Expense;
 import org.example.expense_tracker.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -63,4 +66,19 @@ public class ExpenseService {
                 .category(dto.getCategory())
                 .build();
     }
+
+    public double getTotalExpensesForMonth(int year, int month) {
+        LocalDate start = LocalDate.of(year, month, 1);
+        LocalDate end = start.withDayOfMonth(start.lengthOfMonth());
+        return repository.findByDateBetween(start, end)
+                .stream()
+                .mapToDouble(Expense::getAmount)
+                .sum();
+    }
+
+    public List<Expense> getExpensesByCategory(Category category) {
+        return repository.findByCategory(category);
+    }
+
+
 }

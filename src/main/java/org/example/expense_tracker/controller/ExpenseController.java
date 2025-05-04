@@ -1,6 +1,7 @@
 package org.example.expense_tracker.controller;
 
 import org.example.expense_tracker.dto.ExpenseDto;
+import org.example.expense_tracker.model.Expense;
 import org.example.expense_tracker.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ public class ExpenseController {
 
     @Autowired
     ExpenseService service;
+
 
     @GetMapping
     public List<ExpenseDto> getAllExpenses() {

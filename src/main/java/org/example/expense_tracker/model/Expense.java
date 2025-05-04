@@ -14,6 +14,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class Expense {
+
+    public Expense(String description, double amount, LocalDate date, Category category) {
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+        this.category = category;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
